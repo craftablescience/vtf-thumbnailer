@@ -1,0 +1,13 @@
+#pragma once
+
+#include <cstddef>
+#include <string>
+#include <string_view>
+#include <vector>
+
+constexpr std::string_view PROJECT_NAME    = "${PROJECT_NAME_PRETTY}";
+constexpr std::string_view PROJECT_VERSION = "${PROJECT_VERSION}";
+
+std::vector<std::byte> createThumbnail(const std::string& in, int targetWidth, int targetHeight);
+
+int createThumbnail(const std::string& in, const std::string& out, int targetWidth, int targetHeight);

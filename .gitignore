@@ -1,0 +1,14 @@
+# IDEs
+.idea/
+.vs/
+.vscode/
+CMakeSettings.json
+
+# Project exclude paths
+build/
+cmake-build-*/
+out/
+
+# Generated
+installer/**/generated/
+src/common.h

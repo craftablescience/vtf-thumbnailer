@@ -1,0 +1,8 @@
+{
+    "CacheThumbnail": true,
+    "KPlugin": {
+        "MimeTypes": ["image/x-vtf"],
+        "Name": "Valve Texture Files (${PROJECT_NAME_PRETTY})"
+    },
+    "MimeType": "image/x-vtf;"
+}

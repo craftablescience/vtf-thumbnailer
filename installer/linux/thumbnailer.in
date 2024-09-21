@@ -1,0 +1,4 @@
+[Thumbnailer Entry]
+TryExec=/opt/${PROJECT_NAME}/${PROJECT_NAME}
+Exec=/opt/${PROJECT_NAME}/${PROJECT_NAME} -i %i -o %o -s %s
+MimeType=image/vtf;

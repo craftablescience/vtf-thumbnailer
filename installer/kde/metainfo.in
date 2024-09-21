@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component type="addon">
+    <id>info.craftablescience.${PROJECT_NAME}</id>
+    <metadata_license>MIT</metadata_license>
+    <project_license>MIT</project_license>
+    <extends>org.kde.dolphin.desktop</extends>
+    <extends>org.kde.konqueror.desktop</extends>
+    <extends>org.kde.krusader.desktop</extends>
+    <extends>org.kde.gwenview.desktop</extends>
+    <name>${PROJECT_NAME}</name>
+    <summary>Graphics file format thumbnailers for KDE applications</summary>
+    <description>
+        <p>This plugin allow KDE software to display thumbnails for Valve Texture Files.</p>
+    </description>
+    <url type="homepage">https://github.com/craftablescience/${PROJECT_NAME}</url>
+    <url type="bugtracker">https://github.com/craftablescience/${PROJECT_NAME}/issues</url>
+    <project_group>craftablescience</project_group>
+    <categories>
+        <category>Graphics</category>
+    </categories>
+    <icon type="stock">application-postscript</icon>
+</component>
