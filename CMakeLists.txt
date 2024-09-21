@@ -59,6 +59,9 @@ function(vtf_thumbnailer_configure_target TARGET)
             target_compile_options(${TARGET} PRIVATE "$<$<CONFIG:Release>:/Zi>")
             target_link_options(${TARGET} PRIVATE "$<$<CONFIG:Release>:/DEBUG>" "$<$<CONFIG:Release>:/OPT:REF>" "$<$<CONFIG:Release>:/OPT:ICF>")
         endif()
+	endif()
+	if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND NOT MSVC)
+		target_compile_options(${TARGET} PRIVATE -fexceptions)
     endif()
 endfunction()
 
@@ -88,7 +91,7 @@ else()
         set(QT_MIN_VERSION "5.15.2")
         set(KF_MIN_VERSION "5.92.0")
         set(KDE_COMPILERSETTINGS_LEVEL "5.82")
-        find_package(ECM 1.0.0 REQUIRED NO_MODULE)
+        find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
         set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
         include(ECMOptionalAddSubdirectory)
@@ -103,7 +106,7 @@ else()
         find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED COMPONENTS Archive)
 
         ecm_set_disabled_deprecation_versions(QT 5.15.2 KF 5.100.0)
-
+		set(BUILD_SHARED_LIBS ON)
         kcoreaddons_add_plugin(${PROJECT_NAME} INSTALL_NAMESPACE "kf${QT_MAJOR_VERSION}/${PROJECT_NAME}")
         target_sources(${PROJECT_NAME} PRIVATE
                 "${CMAKE_CURRENT_SOURCE_DIR}/src/common.cpp"

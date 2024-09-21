@@ -7,8 +7,8 @@
     <extends>org.kde.konqueror.desktop</extends>
     <extends>org.kde.krusader.desktop</extends>
     <extends>org.kde.gwenview.desktop</extends>
-    <name>${PROJECT_NAME}</name>
-    <summary>Graphics file format thumbnailers for KDE applications</summary>
+    <name>${PROJECT_NAME_PRETTY}</name>
+    <summary>Valve Texture Format thumbnail generator</summary>
     <description>
         <p>This plugin allow KDE software to display thumbnails for Valve Texture Files.</p>
     </description>
