@@ -117,12 +117,8 @@ else()
                 "${CMAKE_CURRENT_SOURCE_DIR}/src/common.h"
                 "${CMAKE_CURRENT_SOURCE_DIR}/src/kde.cpp"
                 "${CMAKE_CURRENT_SOURCE_DIR}/src/kde.h")
-        target_include_directories(${PROJECT_NAME} PUBLIC
-                ${KF5CoreAddons_INCLUDE_DIRS}
-                ${KIO_INCLUDE_DIRS})
         target_link_libraries(${PROJECT_NAME} PUBLIC
                 KF${QT_MAJOR_VERSION}::Archive
-                KF${QT_MAJOR_VERSION}::KIO
                 KF${QT_MAJOR_VERSION}::KIOGui
                 Qt::Core)
 
