@@ -55,8 +55,20 @@ jobs:
       - name: Install Dependencies
         run: sudo apt update && sudo apt install -y ninja-build extra-cmake-modules
 
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          aqtversion: '==3.1.*'
+          version: '5.15.2'
+          host: 'linux'
+          target: 'desktop'
+          arch: 'gcc_64'
+          dir: '${{github.workspace}}/qt'
+          modules: ${{env.QT_MODULES}}
+          cache: true
+
       - name: Configure CMake
-        run: cmake -G "Ninja" -B build -DCMAKE_BUILD_TYPE=${{matrix.build_type}} -DVTF_THUMBNAILER_BUILD_KDE_PLUGIN=ON
+        run: cmake -G "Ninja" -B build -DCMAKE_BUILD_TYPE=${{matrix.build_type}} -DQt5_DIR="${{github.workspace}}/qt" -DVTF_THUMBNAILER_BUILD_KDE_PLUGIN=ON
 
       - name: Build
         run: cmake --build build --target vtf-thumbnailer --config ${{matrix.build_type}}
@@ -99,6 +111,7 @@ jobs:
         run: cmake --build build --target vtf-thumbnailer --config ${{matrix.build_type}}
 
       - name: Create Installer
+        if: matrix.build_type == 'Release'
         working-directory: build
         run: cpack
 
