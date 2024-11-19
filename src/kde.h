@@ -1,10 +1,10 @@
 #pragma once
 
-#include <KIO/ThumbnailCreator>
+#include <KIOGui/KIO/ThumbnailCreator>
 
 class VTFCreator : public KIO::ThumbnailCreator {
 public:
-	using KIO::ThumbnailCreator::ThumbnailCreator;
+	using ThumbnailCreator::ThumbnailCreator;
 
     KIO::ThumbnailResult create(const KIO::ThumbnailRequest& request) override;
 };

@@ -3,7 +3,7 @@
 #include <QFile>
 #include <QImage>
 
-#include <KPluginFactory>
+#include <KCoreAddons/KPluginFactory>
 
 #include "common.h"
 
