@@ -1,6 +1,6 @@
 #pragma once
 
-#include <KIOGui/KIO/ThumbnailCreator>
+#include <KIO/ThumbnailCreator>
 
 class VTFCreator : public KIO::ThumbnailCreator {
 public:

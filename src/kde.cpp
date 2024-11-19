@@ -3,7 +3,7 @@
 #include <QFile>
 #include <QImage>
 
-#include <KCoreAddons/KPluginFactory>
+#include <KPluginFactory>
 
 #include "common.h"
 
@@ -36,4 +36,4 @@ KIO::ThumbnailResult VTFCreator::create(const KIO::ThumbnailRequest& request) {
 	return !img.isNull() ? KIO::ThumbnailResult::pass(img) : KIO::ThumbnailResult::fail();
 }
 
-#include "kde.moc"
+#include <kde.moc>
