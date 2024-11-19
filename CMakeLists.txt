@@ -121,8 +121,9 @@ else()
                 ${KF5CoreAddons_INCLUDE_DIRS}
                 ${KIO_INCLUDE_DIRS})
         target_link_libraries(${PROJECT_NAME} PUBLIC
-                KF${QT_MAJOR_VERSION}::KIOGui
                 KF${QT_MAJOR_VERSION}::Archive
+                KF${QT_MAJOR_VERSION}::KIO
+                KF${QT_MAJOR_VERSION}::KIOGui
                 Qt::Core)
 
         # Plugin data
