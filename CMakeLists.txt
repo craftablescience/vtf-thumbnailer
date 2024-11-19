@@ -161,7 +161,11 @@ vtf_thumbnailer_configure_target(${PROJECT_NAME})
 target_link_libraries(${PROJECT_NAME} PUBLIC sourcepp::vtfpp)
 
 # CPack stuff
-set(CPACK_PACKAGE_NAME ${PROJECT_NAME_PRETTY})
+if(NOT WIN32 AND VTF_THUMBNAILER_BUILD_KDE_PLUGIN)
+    set(CPACK_PACKAGE_NAME ${PROJECT_NAME_PRETTY}-kde${QT_MAJOR_VERSION})
+else()
+    set(CPACK_PACKAGE_NAME ${PROJECT_NAME_PRETTY})
+endif()
 set(CPACK_PACKAGE_VENDOR "craftablescience")
 set(CPACK_PACKAGE_CONTACT "lauralewisdev@gmail.com")
 set(CPACK_PACKAGE_DESCRIPTION ${PROJECT_DESCRIPTION})
