@@ -41,7 +41,7 @@ jobs:
             build/*.deb
           retention-days: 7
 
-  build-kde:
+  build-kde5:
     strategy:
       matrix:
         build_type: [Debug, Release]
@@ -82,7 +82,54 @@ jobs:
         if: matrix.build_type == 'Release'
         uses: actions/upload-artifact@v4
         with:
-          name: 'VTF-Thumbnailer-KDE'
+          name: 'VTF-Thumbnailer-KDE5'
+          path: |
+            build/*.deb
+          retention-days: 7
+
+  build-kde6:
+    if: false # disable for now
+    strategy:
+      matrix:
+        build_type: [Debug, Release]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Dependencies
+        run: |
+          sudo apt update && sudo apt install -y ninja-build
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          aqtversion: '==3.1.*'
+          version: '6.5.3'
+          host: 'linux'
+          target: 'desktop'
+          arch: 'gcc_64'
+          dir: '${{github.workspace}}/qt'
+          modules: ${{env.QT_MODULES}}
+          cache: true
+
+      - name: Configure CMake
+        run: cmake -G "Ninja" -B build -DCMAKE_INSTALL_PREFIX=`kf6-config --prefix` -DCMAKE_BUILD_TYPE=${{matrix.build_type}} -DQt6_DIR="${{github.workspace}}/qt" -DVTF_THUMBNAILER_BUILD_KDE_PLUGIN=ON
+
+      - name: Build
+        run: cmake --build build --target vtf-thumbnailer --config ${{matrix.build_type}}
+
+      - name: Create Installer
+        working-directory: build
+        run: cpack
+
+      - name: Upload Release
+        if: matrix.build_type == 'Release'
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'VTF-Thumbnailer-KDE6'
           path: |
             build/*.deb
           retention-days: 7
