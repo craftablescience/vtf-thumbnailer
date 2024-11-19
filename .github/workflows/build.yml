@@ -26,7 +26,7 @@ jobs:
         run: cmake -G "Ninja" -B build -DCMAKE_BUILD_TYPE=${{matrix.build_type}}
 
       - name: Build
-        run: cmake --build build --config ${{matrix.build_type}}
+        run: cmake --build build --target vtf-thumbnailer --config ${{matrix.build_type}}
 
       - name: Create Installer
         working-directory: build
@@ -53,13 +53,13 @@ jobs:
           submodules: recursive
 
       - name: Install Dependencies
-        run: sudo apt update && sudo apt install -y ninja-build
+        run: sudo apt update && sudo apt install -y ninja-build extra-cmake-modules
 
       - name: Configure CMake
         run: cmake -G "Ninja" -B build -DCMAKE_BUILD_TYPE=${{matrix.build_type}} -DVTF_THUMBNAILER_BUILD_KDE_PLUGIN=ON
 
       - name: Build
-        run: cmake --build build --config ${{matrix.build_type}}
+        run: cmake --build build --target vtf-thumbnailer --config ${{matrix.build_type}}
 
       - name: Create Installer
         working-directory: build
@@ -96,7 +96,7 @@ jobs:
         run: cmake -G "Ninja" -B build -DCMAKE_BUILD_TYPE=${{matrix.build_type}}
 
       - name: Build
-        run: cmake --build build --config ${{matrix.build_type}}
+        run: cmake --build build --target vtf-thumbnailer --config ${{matrix.build_type}}
 
       - name: Create Installer
         working-directory: build
