@@ -54,7 +54,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          sudo apt update && sudo apt install -y ninja-build extra-cmake-modules libecm1-dev libkdecorations2-dev libkf5codecs-dev libkf5configwidgets-dev libkf5coreaddons-dev libkf5guiaddons-dev libkf5i18n-dev libkf5widgetsaddons-dev libkf5windowsystem-dev libqt5x11extras5-dev libfftw3-dev libkf5package-dev
+          sudo apt update && sudo apt install -y ninja-build qtdeclarative5-dev extra-cmake-modules libkf5guiaddons-dev libkf5crash-dev kinit-dev kio-extras libkf5kdelibs4support5-bin librhash0 gettext libkdecorations2-dev libkf5auth-dev libkf5auth-dev-bin libkf5auth-doc libkf5codecs-dev libkf5codecs-doc libkf5config-dev libkf5config-dev-bin libkf5config-doc libkf5configwidgets-dev libkf5configwidgets-doc libkf5coreaddons-dev libkf5coreaddons-dev-bin libkf5coreaddons-doc libkf5guiaddons-dev libkf5guiaddons-doc libkf5i18n-dev libkf5i18n-doc libkf5widgetsaddons-dev libkf5widgetsaddons-doc libkf5windowsystem-dev libkf5windowsystem-doc libqt5quickshapes5 libqt5scripttools5 libqt5x11extras5-dev qtdeclarative5-dev qtscript5-dev kinit-dev libkf5attica-dev libkf5attica-doc libkf5bookmarks-dev libkf5bookmarks-doc libkf5completion-dev libkf5completion-doc libkf5crash-dev libkf5crash-doc libkf5dbusaddons-dev libkf5dbusaddons-doc libkf5globalaccel-dev libkf5globalaccel-doc libkf5iconthemes-dev libkf5iconthemes-doc libkf5itemviews-dev libkf5itemviews-doc libkf5jobwidgets-dev libkf5jobwidgets-doc libkf5kio-dev libkf5kio-doc libkf5notifications-dev libkf5notifications-doc libkf5service-dev libkf5service-doc libkf5solid-dev libkf5solid-doc libkf5xmlgui-dev libkf5xmlgui-doc kirigami2-dev libice-dev libkf5activities-dev libkf5activities-doc libkf5archive-dev libkf5archive-doc libkf5declarative-dev libkf5declarative-doc libkf5kirigami2-doc libkf5newstuff-dev libkf5newstuff-doc libkf5package-dev libkf5package-doc libkf5plasma-dev libkf5plasma-doc libkf5wayland-dev libkf5wayland-doc libsm-dev libwayland-bin libwayland-dev libx11-xcb-dev libxcb-randr0-dev libxcb-render0-dev libxcb-shape0-dev libxcb-util-dev libxcb-util0-dev
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
@@ -69,7 +69,7 @@ jobs:
           cache: true
 
       - name: Configure CMake
-        run: cmake -G "Ninja" -B build -DCMAKE_BUILD_TYPE=${{matrix.build_type}} -DQt5_DIR="${{github.workspace}}/qt" -DVTF_THUMBNAILER_BUILD_KDE_PLUGIN=ON
+        run: cmake -G "Ninja" -B build -DCMAKE_INSTALL_PREFIX=`kf5-config --prefix` -DCMAKE_BUILD_TYPE=${{matrix.build_type}} -DQt5_DIR="${{github.workspace}}/qt" -DVTF_THUMBNAILER_BUILD_KDE_PLUGIN=ON
 
       - name: Build
         run: cmake --build build --target vtf-thumbnailer --config ${{matrix.build_type}}
