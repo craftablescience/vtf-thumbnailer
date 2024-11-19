@@ -103,8 +103,7 @@ else()
         include(ECMDeprecationSettings)
 
         find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Gui)
-        find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED COMPONENTS KIO)
-        find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED COMPONENTS Archive)
+        find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED COMPONENTS Archive KIO)
 
         ecm_set_disabled_deprecation_versions(QT 5.15.2 KF 5.100.0)
 		set(BUILD_SHARED_LIBS ON)
@@ -114,6 +113,9 @@ else()
                 "${CMAKE_CURRENT_SOURCE_DIR}/src/common.h"
                 "${CMAKE_CURRENT_SOURCE_DIR}/src/kde.cpp"
                 "${CMAKE_CURRENT_SOURCE_DIR}/src/kde.h")
+        target_include_directories(${PROJECT_NAME} PUBLIC
+                ${KF5CoreAddons_INCLUDE_DIRS}
+                ${KIO_INCLUDE_DIRS})
         target_link_libraries(${PROJECT_NAME} PUBLIC
                 KF${QT_MAJOR_VERSION}::KIOGui
                 KF${QT_MAJOR_VERSION}::Archive
