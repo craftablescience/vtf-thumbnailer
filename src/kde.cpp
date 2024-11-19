@@ -15,18 +15,20 @@ KIO::ThumbnailResult VTFCreator::create(const KIO::ThumbnailRequest& request) {
 		return KIO::ThumbnailResult::fail();
 	}
 	// create the thumbnail data
+	int targetWidth = request.targetSize().width();
+	int targetHeight = request.targetSize().height();
 	auto image = createThumbnail(
 	        request.url().toLocalFile().toUtf8().data(),
-	        request.targetSize().width(),
-	        request.targetSize().height());
+	        targetWidth,
+	        targetHeight);
 	if (image.empty()) {
 		return KIO::ThumbnailResult::fail();
 	}
 	// convert to required format
 	QImage thumb{
 		reinterpret_cast<unsigned char*>(image.data()),
-		request.targetSize().width(),
-		request.targetSize().height(),
+		targetWidth,
+		targetHeight,
 		QImage::Format_RGBA8888};
 	thumb = thumb.rgbSwapped();
 	thumb = thumb.mirrored();

@@ -8,16 +8,18 @@
 using namespace sourcepp;
 using namespace vtfpp;
 
-std::vector<std::byte> createThumbnail(const std::string& in, int targetWidth, int targetHeight) {
+std::vector<std::byte> createThumbnail(const std::string& in, int& targetWidth, int& targetHeight) {
 	try {
 		const VTF vtf{in};
 		if (!vtf) {
-			throw std::runtime_error{"Invalid VTF!"};
+			return {};
 		}
 		auto data = vtf.getImageDataAsRGBA8888();
 		if ((targetWidth > 0 && vtf.getWidth() != targetWidth) || (targetHeight > 0 && vtf.getHeight() != targetHeight)) {
 			return ImageConversion::resizeImageData(data, ImageFormat::RGBA8888, vtf.getWidth(), targetWidth, vtf.getHeight(), targetHeight, vtf.imageDataIsSRGB(), ImageConversion::ResizeFilter::BILINEAR);
 		}
+		targetWidth = vtf.getWidth();
+		targetHeight = vtf.getHeight();
 		return data;
 	} catch (const std::overflow_error&) {
 		return {};
@@ -29,7 +31,7 @@ std::vector<std::byte> createThumbnail(const std::string& in, int targetWidth, i
 int createThumbnail(const std::string& in, const std::string& out, int targetWidth, int targetHeight) {
 	auto data = ::createThumbnail(in, targetWidth, targetHeight);
 	if (data.empty()) {
-		return 1;
+		return 2;
 	}
 	if (out.ends_with(".jpg") || out.ends_with(".jpeg")) {
 		return !fs::writeFileBuffer(out, ImageConversion::convertImageDataToFile(data, ImageFormat::RGBA8888, targetWidth, targetHeight, ImageConversion::FileFormat::JPEG));
@@ -40,5 +42,5 @@ int createThumbnail(const std::string& in, const std::string& out, int targetWid
 	if (out.ends_with(".tga")) {
 		return !fs::writeFileBuffer(out, ImageConversion::convertImageDataToFile(data, ImageFormat::RGBA8888, targetWidth, targetHeight, ImageConversion::FileFormat::TGA));
 	}
-	return 1;
+	return 3;
 }

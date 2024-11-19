@@ -10,7 +10,7 @@ int main(int argc, const char* argv[]) {
 	cli.parse_args(argc, argv);
 
 	if (!cli.is_used("-i") || !cli.is_used("-o")) {
-		return 1;
+		return 4;
 	}
 	const auto size = cli.is_used("-s") ? std::stoi(cli.get("-s")) : -1;
 	return ::createThumbnail(cli.get("-i"), cli.get("-o"), size, size);
