@@ -1,0 +1,112 @@
+name: Build
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    # nothing here
+
+jobs:
+  build-linux:
+    strategy:
+      matrix:
+        build_type: [Debug, Release]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Dependencies
+        run: sudo apt update && sudo apt install -y ninja-build
+
+      - name: Configure CMake
+        run: cmake -G "Ninja" -B build -DCMAKE_BUILD_TYPE=${{matrix.build_type}}
+
+      - name: Build
+        run: cmake --build build --config ${{matrix.build_type}}
+
+      - name: Create Installer
+        working-directory: build
+        run: cpack
+
+      - name: Upload Release
+        if: matrix.build_type == 'Release'
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'VTF-Thumbnailer-Linux'
+          path: |
+            build/*.deb
+          retention-days: 7
+
+  build-kde:
+    strategy:
+      matrix:
+        build_type: [Debug, Release]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Dependencies
+        run: sudo apt update && sudo apt install -y ninja-build
+
+      - name: Configure CMake
+        run: cmake -G "Ninja" -B build -DCMAKE_BUILD_TYPE=${{matrix.build_type}} -DVTF_THUMBNAILER_BUILD_KDE_PLUGIN=ON
+
+      - name: Build
+        run: cmake --build build --config ${{matrix.build_type}}
+
+      - name: Create Installer
+        working-directory: build
+        run: cpack
+
+      - name: Upload Release
+        if: matrix.build_type == 'Release'
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'VTF-Thumbnailer-KDE'
+          path: |
+            build/*.deb
+          retention-days: 7
+
+  build-windows:
+    if: false # disable for now
+    strategy:
+      matrix:
+        build_type: [Debug, Release]
+    runs-on: windows-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Set up MSVC
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+          spectre: true
+
+      - name: Configure CMake
+        run: cmake -G "Ninja" -B build -DCMAKE_BUILD_TYPE=${{matrix.build_type}}
+
+      - name: Build
+        run: cmake --build build --config ${{matrix.build_type}}
+
+      - name: Create Installer
+        working-directory: build
+        run: cpack
+
+      - name: Upload Release
+        if: matrix.build_type == 'Release'
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'VTF-Thumbnailer-Windows'
+          path: |
+            build/*.exe
+          retention-days: 7
