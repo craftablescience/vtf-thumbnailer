@@ -47,8 +47,9 @@ function(vtf_thumbnailer_configure_target TARGET)
         endif()
     else()
         # Build with optimizations and don't omit stack pointer for debugging (MSVC defaults are fine)
+        # Also enable exceptions forcibly because KDE is trying to turn them off???
         if(UNIX OR MINGW)
-            target_compile_options(${TARGET} PRIVATE -O2 -fno-omit-frame-pointer)
+            target_compile_options(${TARGET} PRIVATE -O2 -fno-omit-frame-pointer -fexceptions)
         endif()
     endif()
 
