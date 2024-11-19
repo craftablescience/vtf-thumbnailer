@@ -53,7 +53,7 @@ jobs:
           submodules: recursive
 
       - name: Install Dependencies
-        run: sudo apt update && sudo apt install -y ninja-build extra-cmake-modules
+        run: sudo apt update && sudo apt install -y ninja-build extra-cmake-modules libkf5config-dev libkf5coreaddons-dev libkf5guiaddons-dev
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
