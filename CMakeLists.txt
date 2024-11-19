@@ -122,10 +122,12 @@ else()
                 KF${QT_MAJOR_VERSION}::KIOGui
                 Qt::Core)
 
-        # Plugin data
+        # Desktop
         configure_file(
-                "${CMAKE_CURRENT_SOURCE_DIR}/installer/kde/plugin.json.in"
-                "${CMAKE_CURRENT_SOURCE_DIR}/installer/kde/generated/plugin.json")
+                "${CMAKE_CURRENT_SOURCE_DIR}/installer/kde/desktop.in"
+                "${CMAKE_CURRENT_SOURCE_DIR}/installer/kde/generated/${PROJECT_NAME}.desktop")
+        install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/installer/kde/generated/${PROJECT_NAME}.desktop"
+                DESTINATION ${SERVICES_INSTALL_DIR})
 
         # Metadata
         configure_file(
@@ -133,6 +135,11 @@ else()
                 "${CMAKE_CURRENT_SOURCE_DIR}/installer/kde/generated/info.craftablescience.${PROJECT_NAME}.metainfo.xml")
         install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/installer/kde/generated/info.craftablescience.${PROJECT_NAME}.metainfo.xml"
                 DESTINATION ${KDE_INSTALL_METAINFODIR})
+
+        # Plugin data
+        configure_file(
+                "${CMAKE_CURRENT_SOURCE_DIR}/installer/kde/plugin.json.in"
+                "${CMAKE_CURRENT_SOURCE_DIR}/installer/kde/generated/plugin.json")
     else()
         add_executable(${PROJECT_NAME}
                 "${CMAKE_CURRENT_SOURCE_DIR}/src/common.cpp"
