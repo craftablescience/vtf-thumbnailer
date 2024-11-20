@@ -87,6 +87,7 @@ jobs:
           retention-days: 7
 
   build-kde6:
+    if: false # figure out why libkf6kio-dev doesn't exist
     strategy:
       matrix:
         build_type: [Debug, Release]
@@ -98,7 +99,7 @@ jobs:
           submodules: recursive
 
       - name: Install Dependencies
-        run: sudo apt update && sudo apt install -y ninja-build kf6-extra-cmake-modules kf6-kio-devel
+        run: sudo apt update && sudo apt install -y ninja-build extra-cmake-modules libkf6kio-dev
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
