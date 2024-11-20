@@ -100,7 +100,7 @@ else()
         set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
         include(ECMOptionalAddSubdirectory)
-        include(KDEInstallDirs)
+        include(KDEInstallDirs${QT_MAJOR_VERSION})
         include(KDECMakeSettings)
         include(KDECompilerSettings NO_POLICY_SCOPE)
         include(FeatureSummary)

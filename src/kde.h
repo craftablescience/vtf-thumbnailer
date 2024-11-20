@@ -6,5 +6,5 @@ class VTFCreator : public KIO::ThumbnailCreator {
 public:
 	using ThumbnailCreator::ThumbnailCreator;
 
-    KIO::ThumbnailResult create(const KIO::ThumbnailRequest& request) override;
+	KIO::ThumbnailResult create(const KIO::ThumbnailRequest& request) override;
 };
