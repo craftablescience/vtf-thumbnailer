@@ -16,6 +16,12 @@ std::vector<std::byte> createThumbnail(const std::string& in, int& targetWidth, 
 		}
 		auto data = vtf.getImageDataAsRGBA8888();
 		if ((targetWidth > 0 && vtf.getWidth() != targetWidth) || (targetHeight > 0 && vtf.getHeight() != targetHeight)) {
+			if (targetWidth <= 0) {
+				targetWidth = vtf.getWidth();
+			}
+			if (targetHeight <= 0) {
+				targetHeight = vtf.getHeight();
+			}
 			return ImageConversion::resizeImageData(data, ImageFormat::RGBA8888, vtf.getWidth(), targetWidth, vtf.getHeight(), targetHeight, vtf.imageDataIsSRGB(), ImageConversion::ResizeFilter::BILINEAR);
 		}
 		targetWidth = vtf.getWidth();
