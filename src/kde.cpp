@@ -25,14 +25,12 @@ KIO::ThumbnailResult VTFCreator::create(const KIO::ThumbnailRequest& request) {
 		return KIO::ThumbnailResult::fail();
 	}
 	// convert to required format
-	QImage thumb{
+	const auto img = QImage{
 		reinterpret_cast<unsigned char*>(image.data()),
 		targetWidth,
 		targetHeight,
-		QImage::Format_RGBA8888};
-	thumb = thumb.rgbSwapped();
-	thumb = thumb.mirrored();
-	const QImage img = thumb.convertToFormat(QImage::Format_ARGB32_Premultiplied);
+		QImage::Format_RGBA8888,
+	}.convertToFormat(QImage::Format_ARGB32_Premultiplied);
 
 	// done!
 	return !img.isNull() ? KIO::ThumbnailResult::pass(img) : KIO::ThumbnailResult::fail();

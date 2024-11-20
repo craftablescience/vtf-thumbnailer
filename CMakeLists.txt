@@ -120,6 +120,8 @@ else()
         target_link_libraries(${PROJECT_NAME} PUBLIC
                 KF${QT_MAJOR_VERSION}::KIOGui
                 Qt::Core)
+        install(TARGETS ${PROJECT_NAME}
+                DESTINATION ${PLUGIN_INSTALL_DIR})
 
         # Desktop
         configure_file(
