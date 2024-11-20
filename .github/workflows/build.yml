@@ -87,7 +87,6 @@ jobs:
           retention-days: 7
 
   build-kde6:
-    if: false # need to figure out why the kio dev package isn't found
     strategy:
       matrix:
         build_type: [Debug, Release]
@@ -99,7 +98,7 @@ jobs:
           submodules: recursive
 
       - name: Install Dependencies
-        run: sudo apt update && sudo apt install -y ninja-build extra-cmake-modules libkf6kio-dev
+        run: sudo apt update && sudo apt install -y ninja-build kf6-extra-cmake-modules kf6-kio-devel
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v3

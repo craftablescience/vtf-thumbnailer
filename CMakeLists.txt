@@ -119,16 +119,16 @@ else()
                 "${CMAKE_CURRENT_SOURCE_DIR}/src/kde.h")
         target_link_libraries(${PROJECT_NAME} PUBLIC
                 KF${QT_MAJOR_VERSION}::KIOGui
-                Qt::Core)
+                Qt::Gui)
         install(TARGETS ${PROJECT_NAME}
-                DESTINATION ${PLUGIN_INSTALL_DIR})
+                DESTINATION ${KDE_INSTALL_PLUGINDIR})
 
         # Desktop
         configure_file(
                 "${CMAKE_CURRENT_SOURCE_DIR}/installer/kde/desktop.in"
                 "${CMAKE_CURRENT_SOURCE_DIR}/installer/kde/generated/${PROJECT_NAME}.desktop")
         install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/installer/kde/generated/${PROJECT_NAME}.desktop"
-                DESTINATION ${SERVICES_INSTALL_DIR})
+                DESTINATION ${KDE_INSTALL_DESKTOPDIR})
 
         # Metadata
         configure_file(
@@ -142,7 +142,7 @@ else()
                 "${CMAKE_CURRENT_SOURCE_DIR}/installer/linux/mime-type.in"
                 "${CMAKE_CURRENT_SOURCE_DIR}/installer/kde/generated/mime-type.xml")
         install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/installer/kde/generated/mime-type.xml"
-                DESTINATION "/usr/share/mime/packages/"
+                DESTINATION ${KDE_INSTALL_MIMEDIR}
                 RENAME "${PROJECT_NAME}-kde${QT_MAJOR_VERSION}.xml")
 
         # Plugin data
