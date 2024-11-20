@@ -124,11 +124,14 @@ else()
                 DESTINATION ${KDE_INSTALL_PLUGINDIR})
 
         # Desktop
+        if(QT_MAJOR_VERSION STREQUAL "6")
+            set(KDE_INSTALL_KSERVICESDIR "${KDE_INSTALL_DATADIR}/kio")
+        endif()
         configure_file(
                 "${CMAKE_CURRENT_SOURCE_DIR}/installer/kde/desktop.in"
                 "${CMAKE_CURRENT_SOURCE_DIR}/installer/kde/generated/${PROJECT_NAME}.desktop")
         install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/installer/kde/generated/${PROJECT_NAME}.desktop"
-                DESTINATION ${KDE_INSTALL_DESKTOPDIR})
+                DESTINATION ${KDE_INSTALL_KSERVICESDIR})
 
         # Metadata
         configure_file(
