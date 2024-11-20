@@ -87,6 +87,7 @@ jobs:
           retention-days: 7
 
   build-kde6:
+    if: false # todo: libkf6kio-dev not found, find workaround
     strategy:
       matrix:
         build_type: [Debug, Release]
