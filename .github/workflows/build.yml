@@ -133,7 +133,6 @@ jobs:
           retention-days: 7
 
   build-windows:
-    if: false # disable for now
     strategy:
       matrix:
         build_type: [Debug, Release]
