@@ -53,8 +53,7 @@ jobs:
           submodules: recursive
 
       - name: Install Dependencies
-        run: |
-          sudo apt update && sudo apt install -y ninja-build extra-cmake-modules libkf5archive-dev libkf5kio-dev
+        run: sudo apt update && sudo apt install -y ninja-build extra-cmake-modules libkf5archive-dev libkf5kio-dev
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
@@ -69,7 +68,7 @@ jobs:
           cache: true
 
       - name: Configure CMake
-        run: cmake -G "Ninja" -B build -DCMAKE_INSTALL_PREFIX=`kf5-config --prefix` -DCMAKE_BUILD_TYPE=${{matrix.build_type}} -DQt5_DIR="${{github.workspace}}/qt" -DVTF_THUMBNAILER_BUILD_KDE_PLUGIN=ON
+        run: cmake -G "Ninja" -B build -DCMAKE_INSTALL_PREFIX=`kf5-config --prefix` -DCMAKE_BUILD_TYPE=${{matrix.build_type}} -DQT_MAJOR_VERSION="5" -DQt5_DIR="${{github.workspace}}/qt" -DVTF_THUMBNAILER_BUILD_KDE_PLUGIN=ON
 
       - name: Build
         run: cmake --build build --target vtf-thumbnailer --config ${{matrix.build_type}}
@@ -88,7 +87,6 @@ jobs:
           retention-days: 7
 
   build-kde6:
-    if: false # disable for now
     strategy:
       matrix:
         build_type: [Debug, Release]
@@ -100,8 +98,7 @@ jobs:
           submodules: recursive
 
       - name: Install Dependencies
-        run: |
-          sudo apt update && sudo apt install -y ninja-build
+        run: sudo apt update && sudo apt install -y ninja-build extra-cmake-modules libkf6archive-dev libkf6kio-dev
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
@@ -116,7 +113,7 @@ jobs:
           cache: true
 
       - name: Configure CMake
-        run: cmake -G "Ninja" -B build -DCMAKE_INSTALL_PREFIX=`kf6-config --prefix` -DCMAKE_BUILD_TYPE=${{matrix.build_type}} -DQt6_DIR="${{github.workspace}}/qt" -DVTF_THUMBNAILER_BUILD_KDE_PLUGIN=ON
+        run: cmake -G "Ninja" -B build -DCMAKE_INSTALL_PREFIX=`kf6-config --prefix` -DCMAKE_BUILD_TYPE=${{matrix.build_type}} -DQT_MAJOR_VERSION="6" -DQt6_DIR="${{github.workspace}}/qt" -DVTF_THUMBNAILER_BUILD_KDE_PLUGIN=ON
 
       - name: Build
         run: cmake --build build --target vtf-thumbnailer --config ${{matrix.build_type}}
