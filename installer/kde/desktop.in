@@ -1,8 +1,8 @@
 [Desktop Entry]
 Type=Service
-Name=Valve Texture Files (${PROJECT_NAME_PRETTY})
+Name=Valve Texture Format Files (${PROJECT_NAME_PRETTY})
 X-KDE-ServiceTypes=ThumbCreator
 MimeType=image/x-vtf;
 X-KDE-Library=${PROJECT_NAME}
-CacheThumbnail=true
+CacheThumbnail=false
 ThumbnailerVersion=1

@@ -10,7 +10,7 @@
     <name>${PROJECT_NAME_PRETTY}</name>
     <summary>Valve Texture Format thumbnail generator</summary>
     <description>
-        <p>This plugin allow KDE software to display thumbnails for Valve Texture Files.</p>
+        <p>This plugin allow KDE software to display thumbnails for Valve Texture Format files.</p>
     </description>
     <url type="homepage">https://github.com/craftablescience/${PROJECT_NAME}</url>
     <url type="bugtracker">https://github.com/craftablescience/${PROJECT_NAME}/issues</url>
