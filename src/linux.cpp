@@ -3,7 +3,7 @@
 #include "common.h"
 
 int main(int argc, const char* argv[]) {
-	argparse::ArgumentParser cli{::PROJECT_NAME.data(), ::PROJECT_VERSION.data(), argparse::default_arguments::help};
+	argparse::ArgumentParser cli{PROJECT_NAME, PROJECT_VERSION, argparse::default_arguments::help};
 	cli.add_argument("-i").help("Input file");
 	cli.add_argument("-o").help("Output file");
 	cli.add_argument("-s").help("Output size");

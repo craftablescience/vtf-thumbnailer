@@ -83,12 +83,21 @@ configure_file(
         "${CMAKE_CURRENT_SOURCE_DIR}/src/common.h.in"
         "${CMAKE_CURRENT_SOURCE_DIR}/src/common.h")
 
-# Create executable
+# Create thumbnailer
 if(WIN32)
-    add_executable(${PROJECT_NAME}
+    # Exports
+    configure_file(
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/windows.def.in"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/windows.def")
+
+    set(BUILD_SHARED_LIBS ON)
+    add_library(${PROJECT_NAME}
             "${CMAKE_CURRENT_SOURCE_DIR}/src/common.cpp"
             "${CMAKE_CURRENT_SOURCE_DIR}/src/common.h"
-            "${CMAKE_CURRENT_SOURCE_DIR}/src/windows.cpp")
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/windows.cpp"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/windows.def")
+    target_link_libraries(${PROJECT_NAME} PUBLIC
+            Shlwapi)
     install(TARGETS ${PROJECT_NAME} DESTINATION .)
 else()
     option(VTF_THUMBNAILER_BUILD_KDE_PLUGIN "Build KDE thumbnailer plugin" OFF)
@@ -205,6 +214,8 @@ if(WIN32)
     set(CPACK_NSIS_PACKAGE_NAME "${PROJECT_NAME_PRETTY}")
     set(CPACK_NSIS_URL_INFO_ABOUT "${CMAKE_PROJECT_HOMEPAGE_URL}")
     set(CPACK_NSIS_MANIFEST_DPI_AWARE ON)
+    set(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "ExecWait 'regsvr32 /s \\\"$INSTDIR\\\\${PROJECT_NAME}.dll\\\"'")
+    set(CPACK_NSIS_EXTRA_UNINSTALL_COMMANDS "ExecWait 'regsvr32 /u /s \\\"$INSTDIR\\\\${PROJECT_NAME}.dll\\\"'")
     set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME_PRETTY}-${PROJECT_VERSION}-Windows")
 else()
     if(NOT (CPACK_GENERATOR STREQUAL "DEB"))

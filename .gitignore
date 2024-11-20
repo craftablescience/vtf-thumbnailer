@@ -12,3 +12,4 @@ out/
 # Generated
 installer/**/generated/
 src/common.h
+src/windows.def

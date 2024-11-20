@@ -2,11 +2,10 @@
 
 #include <cstddef>
 #include <string>
-#include <string_view>
 #include <vector>
 
-constexpr std::string_view PROJECT_NAME    = "${PROJECT_NAME_PRETTY}";
-constexpr std::string_view PROJECT_VERSION = "${PROJECT_VERSION}";
+#define PROJECT_NAME    "${PROJECT_NAME_PRETTY}"
+#define PROJECT_VERSION "${PROJECT_VERSION}"
 
 std::vector<std::byte> createThumbnail(const std::string& in, int& targetWidth, int& targetHeight);
 
