@@ -9,6 +9,8 @@
 
 Adds previews for VTF files in your file explorer of choice on Windows and Linux.
 
+Supports PC VTF v7.0-7.6, all Xbox 360 VTFs, and the two PS3 VTF formats.
+
 ## Installing
 
 Please read [this file](https://github.com/craftablescience/vtf-thumbnailer/blob/main/INSTALL.md) for step-by-step installation instructions.

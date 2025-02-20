@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.25 FATAL_ERROR)
 # Create project
 project(vtf-thumbnailer
         DESCRIPTION "Preview VTF files in your file explorer of choice."
-        VERSION "0.1.2"
+        VERSION "0.1.3"
         HOMEPAGE_URL "https://github.com/craftablescience/vtf-thumbnailer")
 set(PROJECT_NAME_PRETTY "VTF-Thumbnailer")
 set(CMAKE_CXX_STANDARD 20)
@@ -174,7 +174,7 @@ else()
                 "${CMAKE_CURRENT_SOURCE_DIR}/installer/linux/mime-type.in"
                 "${CMAKE_CURRENT_SOURCE_DIR}/installer/linux/generated/mime-type.xml")
         install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/installer/linux/generated/mime-type.xml"
-                DESTINATION "/usr/share/mime/packages/"
+                DESTINATION "/usr/share/mime/packages"
                 RENAME "${PROJECT_NAME}.xml")
 
         # Thumbnailer
