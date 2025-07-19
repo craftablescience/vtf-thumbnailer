@@ -22,7 +22,7 @@ std::vector<std::byte> createThumbnail(const std::string& in, int& targetWidth, 
 			if (targetHeight <= 0) {
 				targetHeight = vtf.getHeight();
 			}
-			return ImageConversion::resizeImageData(data, ImageFormat::RGBA8888, vtf.getWidth(), targetWidth, vtf.getHeight(), targetHeight, vtf.imageDataIsSRGB(), ImageConversion::ResizeFilter::BILINEAR);
+			return ImageConversion::resizeImageData(data, ImageFormat::RGBA8888, vtf.getWidth(), targetWidth, vtf.getHeight(), targetHeight, vtf.isSRGB(), ImageConversion::ResizeFilter::BILINEAR);
 		}
 		targetWidth = vtf.getWidth();
 		targetHeight = vtf.getHeight();
@@ -40,7 +40,7 @@ int createThumbnail(const std::string& in, const std::string& out, int targetWid
 		return 2;
 	}
 	if (out.ends_with(".jpg") || out.ends_with(".jpeg")) {
-		return !fs::writeFileBuffer(out, ImageConversion::convertImageDataToFile(data, ImageFormat::RGBA8888, targetWidth, targetHeight, ImageConversion::FileFormat::JPEG));
+		return !fs::writeFileBuffer(out, ImageConversion::convertImageDataToFile(data, ImageFormat::RGBA8888, targetWidth, targetHeight, ImageConversion::FileFormat::JPG));
 	}
 	if (out.ends_with(".png")) {
 		return !fs::writeFileBuffer(out, ImageConversion::convertImageDataToFile(data, ImageFormat::RGBA8888, targetWidth, targetHeight, ImageConversion::FileFormat::PNG));

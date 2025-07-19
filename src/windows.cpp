@@ -103,7 +103,7 @@ public:
 				const double scalingFactor = min(static_cast<double>(cx) / vtf.getWidth(), static_cast<double>(cx) / vtf.getHeight());
 				width = std::floor(vtf.getWidth() * scalingFactor);
 				height = std::floor(vtf.getHeight() * scalingFactor);
-				data = ImageConversion::resizeImageData(data, ImageFormat::BGRA8888, vtf.getWidth(), width, vtf.getHeight(), height, vtf.imageDataIsSRGB(), ImageConversion::ResizeFilter::BILINEAR);
+				data = ImageConversion::resizeImageData(data, ImageFormat::BGRA8888, vtf.getWidth(), width, vtf.getHeight(), height, vtf.isSRGB(), ImageConversion::ResizeFilter::BILINEAR);
 			}
 
 			BITMAPINFO bmi = {};
