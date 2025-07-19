@@ -79,6 +79,7 @@ else()
         target_link_libraries(${PROJECT_NAME} PUBLIC
                 KF${QT_MAJOR_VERSION}::KIOGui
                 Qt::Gui)
+        target_compile_options(${PROJECT_NAME} PUBLIC "-fexceptions")
         install(TARGETS ${PROJECT_NAME}
                 DESTINATION ${KDE_INSTALL_PLUGINDIR})
 
