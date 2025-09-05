@@ -7,5 +7,8 @@
         <glob-deleteall/>
         <glob pattern="*.vtf"/>
         <glob pattern="*.VTF"/>
+        <magic priority="50">
+            <match value="VTF\0" type="string" offset="0"/>
+        </magic>
     </mime-type>
 </mime-info>
