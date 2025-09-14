@@ -9,7 +9,8 @@
 
 Adds previews for VTF files in your file explorer of choice on Windows and Linux.
 
-Supports PC VTF v7.0-7.6, all Xbox 360 VTFs, and the two PS3 VTF formats.
+Supports PC VTF v7.0-7.6, all Xbox XTFs, all Xbox 360 VTFs, and the two PS3 VTF formats.
+If you can find a texture made for a Source engine game that this doesn't support, make an issue, and it will.
 
 ## Installing
 

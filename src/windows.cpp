@@ -303,6 +303,10 @@ GLOBAL(HRESULT) DllRegisterServer() {
 	if (SUCCEEDED(hr)) {
 		::DllNotifyShell();
 	}
+	hr = ::SetHKCRRegistryKey(L".xtf\\ShellEx\\{e357fccd-a995-4576-b01f-234630154e96}", nullptr, VTF_THUMBNAILER_CLSID_STR);
+	if (SUCCEEDED(hr)) {
+		::DllNotifyShell();
+	}
 	return hr;
 }
 
@@ -312,5 +316,9 @@ GLOBAL(HRESULT) DllUnregisterServer() {
 	if (FAILED(hr)) {
 		return hr;
 	}
-	return ::DeleteHKCRRegistryKey(L".vtf\\ShellEx\\{e357fccd-a995-4576-b01f-234630154e96}");
+	hr = ::DeleteHKCRRegistryKey(L".vtf\\ShellEx\\{e357fccd-a995-4576-b01f-234630154e96}");
+	if (FAILED(hr)) {
+		return hr;
+	}
+	return ::DeleteHKCRRegistryKey(L".xtf\\ShellEx\\{e357fccd-a995-4576-b01f-234630154e96}");
 }
