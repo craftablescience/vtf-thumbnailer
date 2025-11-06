@@ -15,17 +15,17 @@ std::vector<std::byte> createThumbnail(const std::string& in, int& targetWidth, 
 			return {};
 		}
 		auto data = vtf.getImageDataAsRGBA8888();
-		if ((targetWidth > 0 && vtf.getWidth() != targetWidth) || (targetHeight > 0 && vtf.getHeight() != targetHeight)) {
+		if ((targetWidth > 0 && vtf.getWidthWithoutPadding() != targetWidth) || (targetHeight > 0 && vtf.getHeight() != targetHeight)) {
 			if (targetWidth <= 0) {
-				targetWidth = vtf.getWidth();
+				targetWidth = vtf.getWidthWithoutPadding();
 			}
 			if (targetHeight <= 0) {
-				targetHeight = vtf.getHeight();
+				targetHeight = vtf.getHeightWithoutPadding();
 			}
-			return ImageConversion::resizeImageData(data, ImageFormat::RGBA8888, vtf.getWidth(), targetWidth, vtf.getHeight(), targetHeight, vtf.isSRGB(), ImageConversion::ResizeFilter::BILINEAR);
+			return ImageConversion::resizeImageData(data, ImageFormat::RGBA8888, vtf.getWidthWithoutPadding(), targetWidth, vtf.getHeightWithoutPadding(), targetHeight, vtf.isSRGB(), ImageConversion::ResizeFilter::BILINEAR);
 		}
-		targetWidth = vtf.getWidth();
-		targetHeight = vtf.getHeight();
+		targetWidth = vtf.getWidthWithoutPadding();
+		targetHeight = vtf.getHeightWithoutPadding();
 		return data;
 	} catch (const std::overflow_error&) {
 		return {};

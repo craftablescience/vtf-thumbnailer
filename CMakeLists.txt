@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.25 FATAL_ERROR)
 # set up project
 project(vtf-thumbnailer
         DESCRIPTION "Preview VTF files in your file explorer of choice."
-        VERSION "1.0.0"
+        VERSION "1.1.0"
         HOMEPAGE_URL "https://github.com/craftablescience/vtf-thumbnailer")
 set(PROJECT_NAME_PRETTY "VTF-Thumbnailer")
 set(PROJECT_ORGANIZATION_NAME "craftablescience" CACHE STRING "" FORCE)
