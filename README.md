@@ -18,4 +18,4 @@ Please read [this file](https://github.com/craftablescience/vtf-thumbnailer/blob
 
 ## Backend
 
-This tool is powered by a collection of open-source C++20 Source engine parsers called [sourcepp](https://github.com/craftablescience/sourcepp).
+This tool is powered by a collection of open-source C++20 Source engine parsers called [sourcepp](https://sourcepp.org).
