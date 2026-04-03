@@ -1,3 +1,8 @@
+> [!CAUTION]
+> This software has been merged into [MareTF](https://github.com/craftablescience/MareTF), a CLI/GUI utility to create, edit, and display every type of VTF file ever made.
+>
+> This repository is now unmaintained. Please install MareTF to see VTF thumbnails.
+
 # VTF Thumbnailer
 
 <div>
